@@ -185,21 +185,23 @@ const VideoLists = ({ searchResults }) => {
   const classes = useStyles()
   return (
     <Grid container className={classes.root}>
-      <p>Results</p>
+
       {
-        testArr &&
-        testArr.map((item, index) => {
+        searchResults &&
+        searchResults.map((item, index) => {
           const { title, thumbnails, description } = item.snippet
           const { videoId } = item.id
           const { url } = thumbnails.medium
           return (
-            <VideoCard
-              key={index}
-              title={title}
-              imageURL={url}
-              description={description}
-              videoId={videoId}
-            />
+            <div key={index}>
+              <p>Results</p>
+              <VideoCard
+                title={title}
+                imageURL={url}
+                description={description}
+                videoId={videoId}
+              />
+            </div>
           )
         })
       }
