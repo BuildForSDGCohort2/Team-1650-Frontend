@@ -1,27 +1,28 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Context as HomeContext } from '../context/homeContext'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
-import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
-import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
-    maxHeight: 330
+    maxHeight: 330,
+    marginBottom: '1rem'
   }
 })
 
-export default function VideoCard ({ title, imageURL, description }) {
+export default function VideoCard ({ title, imageURL, description, videoId }) {
   const classes = useStyles()
+  const { updateVideoId } = useContext(HomeContext)
 
   return (
-    <Grid item xs={5}>
-      <Card className={classes.root}>
+    <Grid item xs={12}>
+      <Card className={classes.root} onClick={() => updateVideoId(videoId)}>
         <CardActionArea>
           <CardMedia
             component="img"
@@ -31,7 +32,7 @@ export default function VideoCard ({ title, imageURL, description }) {
             title={title}
           />
           <CardContent>
-            <Typography gutterBottom variant="h6" component="h2">
+            <Typography gutterBottom component="p">
               {title}
             </Typography>
             {/* <Typography variant="body2" color="textSecondary" component="p">
@@ -39,11 +40,6 @@ export default function VideoCard ({ title, imageURL, description }) {
             </Typography> */}
           </CardContent>
         </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-          Play
-          </Button>
-        </CardActions>
       </Card>
     </Grid>
   )

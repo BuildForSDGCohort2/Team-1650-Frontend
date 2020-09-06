@@ -2,11 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './components/App'
+import { Provider as HomeProvider } from './context/homeContext'
 import * as serviceWorker from './serviceWorker'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <HomeProvider>
+      <App />
+    </HomeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { Context as HomeContext } from '../context/homeContext'
 import VideoLists from './VideoLists'
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
@@ -11,7 +12,6 @@ const useStyles = makeStyles({
   },
   centerColumn: {
     display: 'flex',
-    justifyContent: 'center',
     flexDirection: 'column',
     alignItems: 'center'
   }
@@ -20,12 +20,10 @@ const useStyles = makeStyles({
 const Home = () => {
   const classes = useStyles()
   const [searchResults, setSearchResults] = useState([])
+  const { state: { videoId } } = useContext(HomeContext)
 
   useEffect(() => {
-    // (async () => {
-    //   const result = await secureGetRequest(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=surfing&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`)
 
-    // })()
   }, [])
 
   const handleVideoSearch = async (searchText) => {
@@ -49,14 +47,13 @@ const Home = () => {
             onSearch={(searchText) => handleVideoSearch(searchText)}
           />
           <div>
-            {/* <iframe id="player" type="text/html" width="640" height="390"
-              src="http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=http://example.com"
-              frameborder="0"></iframe> */}
+            <iframe id="player" type="text/html" width="640" height="390"
+              src={`http://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=http://example.com`}
+              frameborder="0"></iframe>
           </div>
-          <VideoLists searchResults={searchResults} />
         </Grid>
         <Grid item xs={3}>
-
+          <VideoLists searchResults={searchResults} />
         </Grid>
       </Grid>
     </div>
