@@ -182,7 +182,6 @@ const testArr = [
 ]
 
 const VideoLists = ({ searchResults }) => {
-  console.log(searchResults)
   const classes = useStyles()
   return (
     <Grid container className={classes.root}>
