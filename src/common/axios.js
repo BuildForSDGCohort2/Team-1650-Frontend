@@ -16,13 +16,17 @@ export const securePostRequest = async (subRoute, body) => {
 }
 
 export const secureGetRequest = async (subRoute, query = {}) => {
-  return axios.get(subRoute, {
-    params: query
-  })
-    .then((result) => {
+  try {
+    const result = await axios.get(subRoute, {
+      params: query
+    })
+    if (result) {
       const { status, data } = result
       return { status, data }
-    })
+    }
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export const securePatchRequest = async (subRoute, body = {}) => {

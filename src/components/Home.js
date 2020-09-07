@@ -65,11 +65,11 @@ const Home = () => {
   }
 
   const handleVideoSearch = async (searchText) => {
-    const result = await secureGetRequest(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${searchText}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`)
+    const result = await secureGetRequest(`http://localhost:5000?searchText=${searchText}`)
     if (result) {
       const { status, data } = result
       if (status === 200 && data) {
-        setSearchResults(data.items)
+        setSearchResults(data)
       }
     }
   }
